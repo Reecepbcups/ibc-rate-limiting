@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 
-
-
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/config"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -28,10 +26,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/crisis"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 
-	dbm "github.com/cosmos/cosmos-db"
+	"cosmossdk.io/log"
 	tmcfg "github.com/cometbft/cometbft/config"
 	tmcli "github.com/cometbft/cometbft/libs/cli"
-	"cosmossdk.io/log"
+	dbm "github.com/cosmos/cosmos-db"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the
@@ -106,7 +104,7 @@ func initRootCmd(rootCmd *cobra.Command, encodingConfig appparams.EncodingConfig
 	rootCmd.AddCommand(
 		genutilcli.InitCmd(app.ModuleBasics, app.DefaultNodeHome),
 		tmcli.NewCompletionCmd(rootCmd, true),
-pruning.Cmd(ac.newApp, app.DefaultNodeHome),
+		pruning.Cmd(ac.newApp, app.DefaultNodeHome),
 	)
 
 	server.AddCommands(rootCmd, app.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
@@ -117,9 +115,8 @@ pruning.Cmd(ac.newApp, app.DefaultNodeHome),
 		genesisCommand(encodingConfig),
 		queryCommand(),
 		txCommand(),
-keys.Commands(),
+		keys.Commands(),
 	)
-
 
 }
 
@@ -180,7 +177,6 @@ func txCommand() *cobra.Command {
 		authcmd.GetBroadcastCommand(),
 		authcmd.GetEncodeCommand(),
 		authcmd.GetDecodeCommand(),
-
 	)
 
 	app.ModuleBasics.AddTxCommands(cmd)

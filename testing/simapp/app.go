@@ -255,12 +255,6 @@ func NewSimApp(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) *SimApp {
-	// encodingConfig := MakeEncodingConfig()
-	// MakeEncodingConfig()
-
-	// appCodec := encodingConfig.Marshaler
-	// legacyAmino := encodingConfig.Amino
-	// interfaceRegistry := encodingConfig.InterfaceRegistry
 	interfaceRegistry, _ := types.NewInterfaceRegistryWithOptions(types.InterfaceRegistryOptions{
 		ProtoFiles: proto.HybridResolver,
 		SigningOptions: signing.Options{
